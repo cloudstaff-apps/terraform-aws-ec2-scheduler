@@ -1,18 +1,13 @@
-variable "identifier" {
-  description = "RDS instance or Aurora Cluster identifier for schedule"
-}
-
-variable "aurora_cluster" {
-  default     = false
-  description = "Is Aurora Cluster?"
+variable "instanceid" {
+  description = "EC2 instance id for schedule"
 }
 
 variable "cron_stop" {
-  description = "Cron expression to define when to trigger a stop of the DB"
+  description = "Cron expression to define when to trigger a stop of the EC2"
 }
 
 variable "cron_start" {
-  description = "Cron expression to define when to trigger a start of the DB"
+  description = "Cron expression to define when to trigger a start of the EC2"
 }
 
 variable "enable" {
