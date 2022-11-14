@@ -34,13 +34,13 @@ resource "random_string" "iam_suffix" {
 
 resource "aws_iam_role" "event" {
   count              = var.enable ? 1 : 0
-  name               = substr("rds-scheduler-${var.identifier}-${random_string.iam_suffix.result}", 0, 64)
+  name               = substr("rds-scheduler-${var.identifier}", 0, 64)
   assume_role_policy = data.aws_iam_policy_document.event_trust[0].json
 }
 
 resource "aws_iam_role_policy" "event" {
   count  = var.enable ? 1 : 0
-  name   = substr("rds-scheduler-${var.identifier}-${random_string.iam_suffix.result}", 0, 64)
+  name   = substr("rds-scheduler-${var.identifier}", 0, 64)
   policy = data.aws_iam_policy_document.event[0].json
   role   = aws_iam_role.event[0].name
 }
@@ -60,13 +60,13 @@ data "aws_iam_policy_document" "ssm_automation_trust" {
 
 resource "aws_iam_role" "ssm_automation" {
   count              = var.enable ? 1 : 0
-  name               = substr("rds-scheduler-ssm-${var.identifier}-${random_string.iam_suffix.result}", 0, 64)
+  name               = substr("rds-scheduler-ssm-${var.identifier}", 0, 64)
   assume_role_policy = data.aws_iam_policy_document.ssm_automation_trust[0].json
 }
 
 resource "aws_iam_role_policy" "ssm_automation" {
   count  = var.enable ? 1 : 0
-  name   = substr("rds-scheduler-ssm-${var.identifier}-${random_string.iam_suffix.result}", 0, 64)
+  name   = substr("rds-scheduler-ssm-${var.identifier}", 0, 64)
   role   = aws_iam_role.ssm_automation[0].name
   policy = <<EOF
 {
